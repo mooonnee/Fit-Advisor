@@ -553,6 +553,146 @@
   .guide-faq-q { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
   .guide-faq-a { font-size: 12px; color: var(--text-2); line-height: 1.6; }
   .guide-faq-a strong { color: var(--text); }
+
+  /* ── MY CLOSET ── */
+  .closet-filter-bar {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .closet-filter {
+    padding: 6px 14px; border-radius: var(--radius-pill);
+    font-size: 12px; font-weight: 500;
+    border: 1px solid var(--border-strong);
+    background: var(--surface); color: var(--text-2);
+    cursor: pointer; font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.12s;
+  }
+  .closet-filter.active { background: var(--text); color: var(--surface); border-color: var(--text); }
+  .closet-filter:hover:not(.active) { background: var(--surface2); }
+
+  .closet-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  }
+  @media (max-width: 480px) { .closet-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .closet-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; cursor: pointer;
+    transition: box-shadow 0.15s;
+    position: relative;
+  }
+  .closet-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .closet-item-img {
+    width: 100%; aspect-ratio: 1;
+    object-fit: cover; background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: var(--text-3);
+  }
+  .closet-item-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .closet-item-info { padding: 8px 10px; }
+  .closet-item-name { font-size: 12px; font-weight: 500; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .closet-item-meta { font-size: 10px; color: var(--text-3); }
+  .closet-item-delete {
+    position: absolute; top: 6px; right: 6px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(0,0,0,0.55); color: #fff;
+    border: none; cursor: pointer; font-size: 11px;
+    display: none; align-items: center; justify-content: center;
+  }
+  .closet-item:hover .closet-item-delete { display: flex; }
+
+  .closet-add-card {
+    border: 1.5px dashed var(--border-strong);
+    border-radius: var(--radius); padding: 20px 12px;
+    text-align: center; cursor: pointer;
+    background: transparent; transition: background 0.15s;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; aspect-ratio: 1;
+  }
+  .closet-add-card:hover { background: var(--surface2); }
+  .closet-add-icon { font-size: 22px; color: var(--text-3); }
+  .closet-add-label { font-size: 11px; color: var(--text-3); }
+
+  /* Add item modal */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    display: flex; align-items: flex-end; justify-content: center;
+    z-index: 200; padding: 0;
+  }
+  .modal-sheet {
+    background: var(--surface); border-radius: 20px 20px 0 0;
+    width: 100%; max-width: 720px; max-height: 92vh;
+    overflow-y: auto; padding: 20px 20px 32px;
+    animation: slideUp 0.22s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-handle { width: 36px; height: 4px; border-radius: 2px; background: var(--border-strong); margin: 0 auto 20px; }
+  .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+
+  .category-selector {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px;
+  }
+  .cat-btn {
+    padding: 10px 8px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--surface); cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 12px;
+    text-align: center; transition: all 0.12s;
+    color: var(--text-2);
+  }
+  .cat-btn .cat-emoji { display: block; font-size: 18px; margin-bottom: 4px; }
+  .cat-btn.selected { background: var(--text); color: var(--surface); border-color: var(--text); }
+  .cat-btn:hover:not(.selected) { background: var(--surface2); }
+
+  .mini-upload-zone {
+    border: 1.5px dashed var(--border-strong); border-radius: var(--radius);
+    padding: 24px 16px; text-align: center; cursor: pointer;
+    background: var(--bg); transition: background 0.15s; margin-bottom: 14px;
+  }
+  .mini-upload-zone:hover { background: var(--surface2); }
+  .mini-upload-zone input { display: none; }
+
+  .color-dots { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .color-dot {
+    width: 22px; height: 22px; border-radius: 50%; cursor: pointer;
+    border: 2px solid transparent; transition: border-color 0.1s;
+    flex-shrink: 0;
+  }
+  .color-dot.selected { border-color: var(--text); }
+
+  .ai-tag-result {
+    background: var(--blue-bg); border-radius: var(--radius-sm);
+    padding: 10px 12px; margin-bottom: 14px; font-size: 12px; color: var(--blue-text);
+    display: none;
+  }
+
+  /* Item detail modal */
+  .item-detail-img {
+    width: 100%; max-height: 260px; object-fit: contain;
+    border-radius: var(--radius-sm); background: var(--surface2); margin-bottom: 14px;
+  }
+
+  /* Closet stats bar */
+  .closet-stats {
+    display: flex; gap: 0; margin-bottom: 16px;
+    border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden;
+  }
+  .closet-stat {
+    flex: 1; padding: 10px 8px; text-align: center;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .closet-stat:last-child { border-right: none; }
+  .closet-stat .s-num { font-size: 17px; font-weight: 600; }
+  .closet-stat .s-label { font-size: 10px; color: var(--text-3); margin-top: 1px; }
+
+  /* Compatibility badge on closet items */
+  .compat-badge {
+    position: absolute; bottom: 6px; left: 6px;
+    font-size: 9px; font-weight: 600; padding: 2px 6px;
+    border-radius: var(--radius-pill);
+    background: var(--green-bg); color: var(--green-text);
+    display: none;
+  }
 </style>
 </head>
 <body>
@@ -569,6 +709,7 @@
   <button class="nav-tab active" onclick="switchPage('measure')">신체 측정</button>
   <button class="nav-tab" onclick="switchPage('bodytype')">체형 진단</button>
   <button class="nav-tab" onclick="switchPage('analysis')">상품 분석 <span class="nav-badge" id="analysis-badge" style="display:none;">AI</span></button>
+  <button class="nav-tab" onclick="switchPage('closet')">나의 옷장 <span class="nav-badge" id="closet-count-badge" style="display:none;">0</span></button>
 </nav>
 
 <!-- ═══ PAGE: 신체 측정 ═══ -->
@@ -1135,6 +1276,187 @@ function clearMannequinSelection() {
   </div>
 </div>
 
+<!-- ═══ PAGE: MY CLOSET ═══ -->
+<div class="page" id="page-closet">
+  <div class="container">
+
+    <!-- Stats bar -->
+    <div class="closet-stats" id="closet-stats">
+      <div class="closet-stat"><div class="s-num" id="stat-total">0</div><div class="s-label">전체</div></div>
+      <div class="closet-stat"><div class="s-num" id="stat-tops">0</div><div class="s-label">상의</div></div>
+      <div class="closet-stat"><div class="s-num" id="stat-bottoms">0</div><div class="s-label">하의</div></div>
+      <div class="closet-stat"><div class="s-num" id="stat-shoes">0</div><div class="s-label">신발</div></div>
+      <div class="closet-stat"><div class="s-num" id="stat-acc">0</div><div class="s-label">기타</div></div>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="closet-filter-bar">
+      <button class="closet-filter active" onclick="filterCloset('all', this)">전체</button>
+      <button class="closet-filter" onclick="filterCloset('상의', this)">상의</button>
+      <button class="closet-filter" onclick="filterCloset('하의', this)">하의</button>
+      <button class="closet-filter" onclick="filterCloset('아우터', this)">아우터</button>
+      <button class="closet-filter" onclick="filterCloset('원피스/셋업', this)">원피스/셋업</button>
+      <button class="closet-filter" onclick="filterCloset('신발', this)">신발</button>
+      <button class="closet-filter" onclick="filterCloset('가방', this)">가방</button>
+      <button class="closet-filter" onclick="filterCloset('주얼리', this)">주얼리</button>
+      <button class="closet-filter" onclick="filterCloset('악세서리', this)">악세서리</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="closet-grid" id="closet-grid">
+      <!-- Items rendered by JS -->
+      <div class="closet-add-card" onclick="openAddItemModal()">
+        <div class="closet-add-icon">+</div>
+        <div class="closet-add-label">아이템 추가</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── ADD ITEM MODAL ─── -->
+<div class="modal-backdrop" id="add-item-modal" style="display:none;" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="add-modal-title">아이템 추가</div>
+
+    <!-- Image upload -->
+    <div class="section-label" style="margin-top:0;">사진 업로드</div>
+    <div class="mini-upload-zone" id="modal-upload-zone" onclick="document.getElementById('modal-file-input').click()"
+      ondragover="event.preventDefault()" ondrop="modalHandleDrop(event)">
+      <input type="file" id="modal-file-input" accept="image/*" onchange="modalHandleFile(event)">
+      <div style="font-size:24px; color:var(--text-3); margin-bottom:6px;">↑</div>
+      <div style="font-size:13px; color:var(--text-2);">클릭하거나 드래그해서 사진 추가</div>
+      <div style="font-size:11px; color:var(--text-3); margin-top:4px;">올리면 AI가 카테고리·색상·스타일을 자동으로 태깅해요</div>
+    </div>
+    <div id="modal-img-preview-wrap" style="display:none; position:relative; margin-bottom:14px;">
+      <img id="modal-img-preview" style="width:100%; max-height:220px; object-fit:contain; border-radius:var(--radius-sm); background:var(--surface2);">
+      <button onclick="clearModalImage()" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+
+    <!-- AI tag result -->
+    <div class="ai-tag-result" id="ai-tag-result">
+      <span id="ai-tag-text"></span>
+    </div>
+
+    <!-- Name -->
+    <div class="section-label">아이템 이름</div>
+    <div class="field" style="margin-bottom:14px;">
+      <div class="field-inner">
+        <input type="text" id="item-name-input" placeholder="예: 흰 린넨 셔츠, 검정 슬랙스..." style="padding-right:12px;">
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="section-label">카테고리</div>
+    <div class="category-selector" id="category-selector">
+      <button class="cat-btn" onclick="selectCat('상의',this)"><span class="cat-emoji">👕</span>상의</button>
+      <button class="cat-btn" onclick="selectCat('하의',this)"><span class="cat-emoji">👖</span>하의</button>
+      <button class="cat-btn" onclick="selectCat('아우터',this)"><span class="cat-emoji">🧥</span>아우터</button>
+      <button class="cat-btn" onclick="selectCat('원피스/셋업',this)"><span class="cat-emoji">👗</span>원피스/셋업</button>
+      <button class="cat-btn" onclick="selectCat('신발',this)"><span class="cat-emoji">👟</span>신발</button>
+      <button class="cat-btn" onclick="selectCat('가방',this)"><span class="cat-emoji">👜</span>가방</button>
+      <button class="cat-btn" onclick="selectCat('주얼리',this)"><span class="cat-emoji">💍</span>주얼리</button>
+      <button class="cat-btn" onclick="selectCat('악세서리',this)"><span class="cat-emoji">🧣</span>악세서리</button>
+      <button class="cat-btn" onclick="selectCat('기타',this)"><span class="cat-emoji">📦</span>기타</button>
+    </div>
+
+    <!-- Color -->
+    <div class="section-label">대표 색상</div>
+    <div class="color-dots" id="color-dots">
+      <div class="color-dot" data-color="블랙" style="background:#1A1916;" onclick="selectColor(this)" title="블랙"></div>
+      <div class="color-dot" data-color="화이트" style="background:#F5F4F0; border:1px solid #ddd;" onclick="selectColor(this)" title="화이트"></div>
+      <div class="color-dot" data-color="그레이" style="background:#8C8C8C;" onclick="selectColor(this)" title="그레이"></div>
+      <div class="color-dot" data-color="네이비" style="background:#1B2A4A;" onclick="selectColor(this)" title="네이비"></div>
+      <div class="color-dot" data-color="베이지" style="background:#C9B99A;" onclick="selectColor(this)" title="베이지"></div>
+      <div class="color-dot" data-color="브라운" style="background:#7B4F2E;" onclick="selectColor(this)" title="브라운"></div>
+      <div class="color-dot" data-color="카키" style="background:#6B6B3A;" onclick="selectColor(this)" title="카키"></div>
+      <div class="color-dot" data-color="레드" style="background:#C0392B;" onclick="selectColor(this)" title="레드"></div>
+      <div class="color-dot" data-color="핑크" style="background:#E8B4C0;" onclick="selectColor(this)" title="핑크"></div>
+      <div class="color-dot" data-color="블루" style="background:#3A7BBF;" onclick="selectColor(this)" title="블루"></div>
+      <div class="color-dot" data-color="그린" style="background:#4A8C5C;" onclick="selectColor(this)" title="그린"></div>
+      <div class="color-dot" data-color="옐로우" style="background:#E8C84A;" onclick="selectColor(this)" title="옐로우"></div>
+      <div class="color-dot" data-color="퍼플" style="background:#7B5EA7;" onclick="selectColor(this)" title="퍼플"></div>
+      <div class="color-dot" data-color="오렌지" style="background:#E87A2A;" onclick="selectColor(this)" title="오렌지"></div>
+      <div class="color-dot" data-color="멀티" style="background:linear-gradient(135deg,#e55,#55e,#5e5);" onclick="selectColor(this)" title="멀티"></div>
+    </div>
+
+    <!-- Structured memo fields -->
+    <div class="section-label" style="margin-top:14px;">추가 정보 <span style="font-size:10px;font-weight:400;color:var(--text-3);">선택사항</span></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px;">
+      <div class="field" style="grid-column: 1 / -1;">
+        <label style="font-size:11px;font-weight:500;color:var(--text-2);">구매처</label>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input type="text" id="item-source-input" placeholder="무신사, 지그재그, URL…"
+            style="flex:1;padding:9px 12px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); font-size:13px; font-family:inherit; background:var(--bg); color:var(--text);"
+            oninput="onSourceInput(this.value)">
+          <button id="url-extract-btn" onclick="extractFromUrl()" style="display:none;white-space:nowrap;padding:9px 13px;border-radius:var(--radius-sm);border:none;background:var(--text);color:var(--surface);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;">정보 가져오기</button>
+        </div>
+        <div id="url-extract-status" style="display:none;font-size:11px;margin-top:5px;"></div>
+      </div>
+      <div class="field">
+        <label style="font-size:11px;font-weight:500;color:var(--text-2);">사이즈</label>
+        <input type="text" id="item-size-input" placeholder="M, 95, 265…" style="padding:9px 12px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); font-size:13px; font-family:inherit; background:var(--bg); color:var(--text); width:100%;">
+      </div>
+      <div class="field">
+        <label style="font-size:11px;font-weight:500;color:var(--text-2);">소재</label>
+        <input type="text" id="item-material-input" placeholder="면 100%, 울 혼방…" style="padding:9px 12px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); font-size:13px; font-family:inherit; background:var(--bg); color:var(--text); width:100%;">
+      </div>
+      <div class="field">
+        <label style="font-size:11px;font-weight:500;color:var(--text-2);">가격</label>
+        <input type="text" id="item-price-input" placeholder="39,000원" style="padding:9px 12px; border:1px solid var(--border-strong); border-radius:var(--radius-sm); font-size:13px; font-family:inherit; background:var(--bg); color:var(--text); width:100%;">
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+      <button class="btn btn-primary" style="flex:1;" id="modal-save-btn" onclick="saveClosetItem()">저장하기</button>
+      <button class="btn btn-secondary" onclick="closeAddItemModal()">취소</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ITEM DETAIL MODAL ─── -->
+<div class="modal-backdrop" id="item-detail-modal" style="display:none;" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <img id="detail-img" class="item-detail-img" style="display:none;">
+    <div id="detail-no-img" style="width:100%;height:120px;background:var(--surface2);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:14px;"></div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+      <div>
+        <div id="detail-name" style="font-size:18px;font-weight:600;"></div>
+        <div id="detail-meta" style="font-size:12px;color:var(--text-3);margin-top:3px;"></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button id="detail-edit-btn" class="btn btn-secondary" style="font-size:12px;padding:6px 12px;">수정</button>
+        <button id="detail-delete-btn" class="btn btn-secondary" style="font-size:12px;padding:6px 12px;color:var(--red-text);">삭제</button>
+      </div>
+    </div>
+    <div id="detail-memo" style="margin-bottom:14px;display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div id="detail-source-wrap" style="display:none;background:var(--surface2);border-radius:var(--radius-sm);padding:8px 10px;">
+          <div style="font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">구매처</div>
+          <div id="detail-source" style="font-size:12px;color:var(--text-2);word-break:break-all;"></div>
+        </div>
+        <div id="detail-size-wrap" style="display:none;background:var(--surface2);border-radius:var(--radius-sm);padding:8px 10px;">
+          <div style="font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">사이즈</div>
+          <div id="detail-size" style="font-size:13px;font-weight:500;color:var(--text);"></div>
+        </div>
+        <div id="detail-material-wrap" style="display:none;background:var(--surface2);border-radius:var(--radius-sm);padding:8px 10px;">
+          <div style="font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">소재</div>
+          <div id="detail-material" style="font-size:12px;color:var(--text-2);"></div>
+        </div>
+        <div id="detail-price-wrap" style="display:none;background:var(--surface2);border-radius:var(--radius-sm);padding:8px 10px;">
+          <div style="font-size:10px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">가격</div>
+          <div id="detail-price" style="font-size:13px;font-weight:500;color:var(--text);"></div>
+        </div>
+      </div>
+    </div>
+    <div id="detail-ai-tags" style="margin-bottom:16px;"></div>
+    <button class="btn btn-primary btn-full" onclick="analyzeCompatibility()" id="detail-compat-btn">이 아이템과 어울리는 옷 추천받기 →</button>
+    <div id="detail-compat-result" style="margin-top:12px;"></div>
+  </div>
+</div>
+
 <!-- ═══ PAGE: 상품 분석 ═══ -->
 <div class="page" id="page-analysis">
   <div class="container">
@@ -1201,6 +1523,14 @@ function clearMannequinSelection() {
 let saved = {};
 let uploadedImageBase64 = null;
 let uploadedImageType = null;
+let closetItems = [];       // array of item objects
+let activeFilter = 'all';
+let modalImageBase64 = null;
+let modalImageType = null;
+let selectedCategory = null;
+let selectedColorVal = null;
+let currentDetailId = null;
+let editingItemId = null;   // null = 추가모드, string id = 수정모드
 
 const FIELDS = [
   ['m-height','height'],['m-upper','upper'],['m-lower','lower'],
@@ -1250,6 +1580,7 @@ function toggleGuide() {
       updateStatus();
     }
   } catch(e) {}
+  loadCloset();
 })();
 
 function updateStatus() {
@@ -1283,8 +1614,536 @@ function switchPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
-  const tabs = { measure: 0, bodytype: 1, analysis: 2 };
+  const tabs = { measure: 0, bodytype: 1, analysis: 2, closet: 3 };
   document.querySelectorAll('.nav-tab')[tabs[name]].classList.add('active');
+}
+
+// ═══════════════════════════════════════════
+// ── MY CLOSET LOGIC ──
+// ═══════════════════════════════════════════
+
+const CAT_EMOJI = {
+  '상의':'👕','하의':'👖','아우터':'🧥','원피스/셋업':'👗',
+  '신발':'👟','가방':'👜','주얼리':'💍','악세서리':'🧣','기타':'📦'
+};
+
+function loadCloset() {
+  try {
+    const raw = localStorage.getItem('fit_closet_v1');
+    if (raw) closetItems = JSON.parse(raw);
+  } catch(e) { closetItems = []; }
+  renderCloset();
+}
+
+function saveClosetToStorage() {
+  try { localStorage.setItem('fit_closet_v1', JSON.stringify(closetItems)); } catch(e) {}
+}
+
+function renderCloset() {
+  const grid = document.getElementById('closet-grid');
+  const filtered = activeFilter === 'all' ? closetItems : closetItems.filter(i => i.category === activeFilter);
+
+  // Stats
+  document.getElementById('stat-total').textContent = closetItems.length;
+  document.getElementById('stat-tops').textContent   = closetItems.filter(i=>i.category==='상의').length;
+  document.getElementById('stat-bottoms').textContent= closetItems.filter(i=>i.category==='하의').length;
+  document.getElementById('stat-shoes').textContent  = closetItems.filter(i=>i.category==='신발').length;
+  document.getElementById('stat-acc').textContent    = closetItems.filter(i=>['가방','주얼리','악세서리'].includes(i.category)).length;
+
+  // Badge
+  const badge = document.getElementById('closet-count-badge');
+  if (closetItems.length > 0) { badge.textContent = closetItems.length; badge.style.display = ''; }
+  else badge.style.display = 'none';
+
+  // Build grid
+  let html = '';
+  filtered.forEach(item => {
+    const imgHtml = item.imageData
+      ? `<div class="closet-item-img"><img src="${item.imageData}" loading="lazy"></div>`
+      : `<div class="closet-item-img">${CAT_EMOJI[item.category]||'📦'}</div>`;
+    html += `<div class="closet-item" onclick="openItemDetail('${item.id}')">
+      ${imgHtml}
+      <div class="closet-item-info">
+        <div class="closet-item-name">${item.name||'이름 없음'}</div>
+        <div class="closet-item-meta">${item.category}${item.color ? ' · ' + item.color : ''}</div>
+      </div>
+      <button class="closet-item-delete" onclick="event.stopPropagation();deleteClosetItem('${item.id}')">✕</button>
+    </div>`;
+  });
+
+  // Add button always last
+  html += `<div class="closet-add-card" onclick="openAddItemModal()">
+    <div class="closet-add-icon">+</div>
+    <div class="closet-add-label">아이템 추가</div>
+  </div>`;
+
+  grid.innerHTML = html;
+}
+
+function filterCloset(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.closet-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCloset();
+}
+
+// ─── ADD ITEM MODAL ───
+function openAddItemModal() {
+  editingItemId = null;
+  document.getElementById('add-modal-title').textContent = '아이템 추가';
+  document.getElementById('modal-save-btn').textContent = '저장하기';
+  selectedCategory = null;
+  selectedColorVal = null;
+  modalImageBase64 = null;
+  modalImageType = null;
+  document.getElementById('modal-img-preview-wrap').style.display = 'none';
+  document.getElementById('modal-upload-zone').style.display = 'block';
+  document.getElementById('item-name-input').value = '';
+  document.getElementById('item-source-input').value = '';
+  document.getElementById('url-extract-btn').style.display = 'none';
+  document.getElementById('url-extract-status').style.display = 'none';
+  document.getElementById('item-size-input').value = '';
+  document.getElementById('item-material-input').value = '';
+  document.getElementById('item-price-input').value = '';
+  document.getElementById('ai-tag-result').style.display = 'none';
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('selected'));
+  document.getElementById('add-item-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function openEditModal(id) {
+  const item = closetItems.find(i => i.id === id);
+  if (!item) return;
+
+  // close detail first
+  document.getElementById('item-detail-modal').style.display = 'none';
+
+  editingItemId = id;
+  document.getElementById('add-modal-title').textContent = '아이템 수정';
+  document.getElementById('modal-save-btn').textContent = '수정 저장';
+
+  selectedCategory = item.category || null;
+  selectedColorVal = item.color || null;
+
+  // Pre-fill image
+  if (item.imageData) {
+    modalImageBase64 = item.imageData.split(',')[1];
+    modalImageType = item.imageData.split(';')[0].replace('data:', '');
+    document.getElementById('modal-img-preview').src = item.imageData;
+    document.getElementById('modal-img-preview-wrap').style.display = 'block';
+    document.getElementById('modal-upload-zone').style.display = 'none';
+  } else {
+    modalImageBase64 = null; modalImageType = null;
+    document.getElementById('modal-img-preview-wrap').style.display = 'none';
+    document.getElementById('modal-upload-zone').style.display = 'block';
+  }
+
+  // Pre-fill text fields
+  document.getElementById('item-name-input').value = item.name || '';
+  document.getElementById('item-source-input').value = item.source || '';
+  // URL이면 추출 버튼 표시
+  if (item.source) onSourceInput(item.source);
+  document.getElementById('item-size-input').value = item.size || '';
+  document.getElementById('item-material-input').value = item.material || '';
+  document.getElementById('item-price-input').value = item.price || '';
+  document.getElementById('ai-tag-result').style.display = 'none';
+
+  // Pre-select category button
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    b.classList.remove('selected');
+    if (item.category && b.textContent.includes(item.category.split('/')[0])) {
+      b.classList.add('selected');
+    }
+  });
+
+  // Pre-select color dot
+  document.querySelectorAll('.color-dot').forEach(d => {
+    d.classList.toggle('selected', d.dataset.color === item.color);
+  });
+
+  document.getElementById('add-item-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAddItemModal() {
+  document.getElementById('add-item-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function closeModalOnBackdrop(e) {
+  if (e.target.classList.contains('modal-backdrop')) {
+    document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none');
+    document.body.style.overflow = '';
+  }
+}
+
+function selectCat(cat, btn) {
+  selectedCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectColor(dot) {
+  selectedColorVal = dot.dataset.color;
+  document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('selected'));
+  dot.classList.add('selected');
+}
+
+function modalHandleFile(e) {
+  const file = e.target.files[0];
+  if (file) modalProcessFile(file);
+}
+
+function modalHandleDrop(e) {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) modalProcessFile(file);
+}
+
+function modalProcessFile(file) {
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    modalImageBase64 = e.target.result.split(',')[1];
+    modalImageType = file.type;
+    document.getElementById('modal-img-preview').src = e.target.result;
+    document.getElementById('modal-img-preview-wrap').style.display = 'block';
+    document.getElementById('modal-upload-zone').style.display = 'none';
+    await autoTagItem();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearModalImage() {
+  modalImageBase64 = null; modalImageType = null;
+  document.getElementById('modal-img-preview-wrap').style.display = 'none';
+  document.getElementById('modal-upload-zone').style.display = 'block';
+  document.getElementById('modal-file-input').value = '';
+  document.getElementById('ai-tag-result').style.display = 'none';
+}
+
+// ── URL 자동 감지 ──
+function onSourceInput(val) {
+  const btn = document.getElementById('url-extract-btn');
+  const isUrl = val.startsWith('http://') || val.startsWith('https://') || val.startsWith('www.');
+  btn.style.display = isUrl ? 'block' : 'none';
+  if (!isUrl) {
+    document.getElementById('url-extract-status').style.display = 'none';
+  }
+}
+
+// ── URL에서 상품 정보 추출 ──
+async function extractFromUrl() {
+  const url = document.getElementById('item-source-input').value.trim();
+  if (!url) return;
+
+  const btn = document.getElementById('url-extract-btn');
+  const status = document.getElementById('url-extract-status');
+  btn.disabled = true;
+  btn.textContent = '추출 중…';
+  status.style.display = 'block';
+  status.style.color = 'var(--text-3)';
+  status.textContent = '페이지에서 상품 정보를 읽어오는 중이에요...';
+
+  try {
+    // Claude에게 URL 기반으로 상품 정보 파싱 요청
+    // (브라우저에서 직접 크롤링은 CORS로 불가하므로, Claude의 지식 + URL 패턴 분석으로 추론)
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 500,
+        system: '패션 쇼핑몰 URL 분석 전문가. JSON만 반환.',
+        messages: [{ role: 'user', content: `다음 쇼핑몰 URL에서 추출할 수 있는 상품 정보를 분석해줘.
+URL: ${url}
+
+URL의 도메인, 경로, 파라미터, 상품 ID 등을 분석해서 가능한 정보를 추출해줘.
+무신사(musinsa.com), 에이블리(a-bly.com), 29CM(29cm.co.kr), 지그재그(zigzag.kr), 카카오스타일, W컨셉(wconcept.co.kr), SSF샵, 유니클로(uniqlo.com), 자라(zara.com), H&M(hm.com), 스타일쉐어 등 한국 쇼핑몰 URL 구조를 잘 알고 있어.
+
+JSON만 반환 (마크다운 없이, 추출 불가한 필드는 null):
+{
+  "productName": "상품명 (URL에서 추론 가능하면 입력, 아니면 null)",
+  "category": "상의 또는 하의 또는 아우터 또는 원피스/셋업 또는 신발 또는 가방 또는 주얼리 또는 악세서리 또는 기타 (추론 가능하면 입력)",
+  "price": "가격 (URL에 포함된 경우, 아니면 null)",
+  "material": "소재 (알 수 있으면 입력, 아니면 null)",
+  "color": "색상 (URL에서 추론 가능하면 입력, 아니면 null)",
+  "brand": "브랜드명 또는 쇼핑몰명",
+  "confidence": "high 또는 medium 또는 low (정보 신뢰도)",
+  "note": "추출 결과에 대한 한 줄 설명"
+}` }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+
+    let filled = [];
+
+    // 상품명 자동 입력
+    if (result.productName && !document.getElementById('item-name-input').value) {
+      document.getElementById('item-name-input').value = result.productName;
+      filled.push('상품명');
+    }
+
+    // 가격 자동 입력
+    if (result.price && !document.getElementById('item-price-input').value) {
+      document.getElementById('item-price-input').value = result.price;
+      filled.push('가격');
+    }
+
+    // 소재 자동 입력
+    if (result.material && !document.getElementById('item-material-input').value) {
+      document.getElementById('item-material-input').value = result.material;
+      filled.push('소재');
+    }
+
+    // 카테고리 자동 선택
+    if (result.category && !selectedCategory) {
+      const btn = [...document.querySelectorAll('.cat-btn')].find(b =>
+        b.textContent.includes(result.category.split('/')[0])
+      );
+      if (btn) { selectCat(result.category, btn); filled.push('카테고리'); }
+    }
+
+    // 색상 자동 선택
+    if (result.color && !selectedColorVal) {
+      const dot = [...document.querySelectorAll('.color-dot')].find(d =>
+        result.color.includes(d.dataset.color) || d.dataset.color.includes(result.color.replace('색','').trim())
+      );
+      if (dot) { selectColor(dot); filled.push('색상'); }
+    }
+
+    if (filled.length > 0) {
+      status.style.color = 'var(--green-text)';
+      status.textContent = `✓ ${filled.join(', ')} 자동 입력됨${result.confidence === 'low' ? ' (정보가 제한적일 수 있어요)' : ''}`;
+    } else {
+      status.style.color = 'var(--text-3)';
+      status.textContent = result.note || 'URL에서 추출 가능한 정보가 없어요. 직접 입력해주세요.';
+    }
+
+  } catch(e) {
+    status.style.color = 'var(--red-text)';
+    status.textContent = '정보 추출에 실패했어요. 직접 입력해주세요.';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '정보 가져오기';
+}
+
+async function autoTagItem() {
+  if (!modalImageBase64) return;
+  const tagEl = document.getElementById('ai-tag-result');
+  const tagText = document.getElementById('ai-tag-text');
+  tagEl.style.display = 'block';
+  tagText.textContent = 'AI가 이미지를 분석 중입니다...';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: '패션 아이템 이미지 분석 전문가. JSON만 반환.',
+        messages: [{ role: 'user', content: [
+          { type: 'image', source: { type: 'base64', media_type: modalImageType, data: modalImageBase64 } },
+          { type: 'text', text: `이 패션 아이템을 분석해줘. 다음 JSON만 반환 (마크다운 없이):
+{"name":"아이템 이름(한국어,15자이내)","category":"상의 또는 하의 또는 아우터 또는 원피스/셋업 또는 신발 또는 가방 또는 주얼리 또는 악세서리 또는 기타","color":"대표색(한국어)","style":"스타일 키워드1,키워드2","material":"추정 소재(확실하지 않으면 생략)","memo":"한 줄 특징 설명"}` }
+        ]}]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+
+    // Auto-fill name
+    if (result.name && !document.getElementById('item-name-input').value) {
+      document.getElementById('item-name-input').value = result.name;
+    }
+    // Auto-select category
+    if (result.category) {
+      const btn = [...document.querySelectorAll('.cat-btn')].find(b => b.textContent.includes(result.category.split('/')[0]));
+      if (btn) selectCat(result.category, btn);
+    }
+    // Auto-select color
+    if (result.color) {
+      const dot = [...document.querySelectorAll('.color-dot')].find(d => result.color.includes(d.dataset.color) || d.dataset.color.includes(result.color.replace('색','').trim()));
+      if (dot) selectColor(dot);
+    }
+    // Auto-fill material
+    if (result.material && !document.getElementById('item-material-input').value) {
+      document.getElementById('item-material-input').value = result.material;
+    }
+
+    const tags = [];
+    if (result.style) tags.push(...result.style.split(',').map(s => s.trim()));
+    if (result.material) tags.push(result.material);
+
+    tagText.innerHTML = `AI 자동 태깅 완료 ✓${tags.length ? ' — ' + tags.map(t=>`<strong>${t}</strong>`).join(' · ') : ''}`;
+  } catch(e) {
+    tagText.textContent = '자동 태깅 실패. 직접 입력해주세요.';
+  }
+}
+
+function saveClosetItem() {
+  const name     = document.getElementById('item-name-input').value.trim() || '이름 없음';
+  const category = selectedCategory || '기타';
+  const color    = selectedColorVal || '';
+  const source   = document.getElementById('item-source-input').value.trim();
+  const size     = document.getElementById('item-size-input').value.trim();
+  const material = document.getElementById('item-material-input').value.trim();
+  const price    = document.getElementById('item-price-input').value.trim();
+  const imageData = modalImageBase64 ? `data:${modalImageType};base64,${modalImageBase64}` : null;
+
+  if (editingItemId) {
+    // ── 수정 모드 ──
+    const idx = closetItems.findIndex(i => i.id === editingItemId);
+    if (idx !== -1) {
+      closetItems[idx] = {
+        ...closetItems[idx],   // preserve id, addedAt
+        name, category, color, source, size, material, price,
+        imageData: imageData || closetItems[idx].imageData,   // keep old image if not changed
+        updatedAt: new Date().toISOString(),
+      };
+    }
+    saveClosetToStorage();
+    closeAddItemModal();
+    renderCloset();
+    showToast(`"${name}" 수정 완료 ✓`);
+  } else {
+    // ── 추가 모드 ──
+    const item = {
+      id: Date.now().toString(),
+      name, category, color, source, size, material, price,
+      imageData,
+      addedAt: new Date().toISOString(),
+    };
+    closetItems.unshift(item);
+    saveClosetToStorage();
+    closeAddItemModal();
+    renderCloset();
+    showToast(`"${name}" 이(가) 나의 옷장에 추가됐어요 ✓`);
+  }
+}
+
+function deleteClosetItem(id) {
+  closetItems = closetItems.filter(i => i.id !== id);
+  saveClosetToStorage();
+  renderCloset();
+  document.getElementById('item-detail-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  showToast('아이템이 삭제됐어요');
+}
+
+// ─── ITEM DETAIL ───
+function openItemDetail(id) {
+  const item = closetItems.find(i => i.id === id);
+  if (!item) return;
+  currentDetailId = id;
+
+  const imgEl = document.getElementById('detail-img');
+  const noImgEl = document.getElementById('detail-no-img');
+  if (item.imageData) {
+    imgEl.src = item.imageData; imgEl.style.display = 'block';
+    noImgEl.style.display = 'none';
+  } else {
+    imgEl.style.display = 'none';
+    noImgEl.style.display = 'flex'; noImgEl.textContent = CAT_EMOJI[item.category]||'📦';
+  }
+
+  document.getElementById('detail-name').textContent = item.name || '이름 없음';
+  document.getElementById('detail-meta').textContent = `${item.category}${item.color ? ' · ' + item.color : ''} · ${new Date(item.addedAt).toLocaleDateString('ko-KR')} 추가`;
+
+  // Structured memo fields
+  const memoEl = document.getElementById('detail-memo');
+  const fields = [
+    ['detail-source', 'detail-source-wrap', item.source],
+    ['detail-size',   'detail-size-wrap',   item.size],
+    ['detail-material','detail-material-wrap', item.material],
+    ['detail-price',  'detail-price-wrap',  item.price],
+  ];
+  let anyMemo = false;
+  fields.forEach(([elId, wrapId, val]) => {
+    const wrap = document.getElementById(wrapId);
+    const el   = document.getElementById(elId);
+    if (val) {
+      // If source looks like a URL, render as link
+      if (elId === 'detail-source' && (val.startsWith('http') || val.startsWith('www'))) {
+        el.innerHTML = `<a href="${val}" target="_blank" style="color:var(--blue-text);text-decoration:underline;font-size:11px;">${val.length > 30 ? val.slice(0,30)+'…' : val}</a>`;
+      } else {
+        el.textContent = val;
+      }
+      wrap.style.display = 'block';
+      anyMemo = true;
+    } else {
+      wrap.style.display = 'none';
+    }
+  });
+  memoEl.style.display = anyMemo ? 'block' : 'none';
+
+  document.getElementById('detail-compat-result').innerHTML = '';
+  document.getElementById('detail-edit-btn').onclick = () => openEditModal(id);
+  document.getElementById('detail-delete-btn').onclick = () => { if(confirm(`"${item.name}" 을(를) 삭제할까요?`)) deleteClosetItem(id); };
+
+  document.getElementById('item-detail-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+async function analyzeCompatibility() {
+  const item = closetItems.find(i => i.id === currentDetailId);
+  if (!item) return;
+
+  const btn = document.getElementById('detail-compat-btn');
+  const result = document.getElementById('detail-compat-result');
+  btn.disabled = true; btn.textContent = '분석 중...';
+  result.innerHTML = '<div class="loading-state"><span class="spinner"></span>옷장 아이템과 궁합을 분석 중이에요...</div>';
+
+  const otherItems = closetItems.filter(i => i.id !== currentDetailId).slice(0, 20);
+  const otherSummary = otherItems.map(i => `${i.category} / ${i.color||'색상미상'} / ${i.name}`).join('\n');
+
+  const prompt = `분석 대상 아이템: ${item.name} (${item.category}, ${item.color||'색상미상'})
+${item.material ? `소재: ${item.material}` : ''}${item.size ? `  사이즈: ${item.size}` : ''}
+
+내 옷장에 있는 다른 아이템들:
+${otherSummary || '(등록된 다른 아이템 없음)'}
+
+내 신체: ${saved.height||'?'}cm, 체형 기반 스타일 선호도
+
+위 아이템들과 어울리는 조합과, 아직 없어서 사면 유용할 아이템을 추천해줘.
+JSON만 반환:
+{
+  "goodWith": [{"item":"기존 아이템 이름","reason":"어울리는 이유 한 줄"}],
+  "shoppingGap": [{"item":"추천 구매 아이템","reason":"이유","category":"카테고리"}],
+  "stylingTip": "이 아이템 활용 스타일링 팁 1~2문장"
+}`;
+
+  try {
+    const text = await callClaude(prompt, '패션 스타일리스트. JSON만 반환.');
+    const clean = text.replace(/```json|```/g, '').trim();
+    const data = JSON.parse(clean);
+
+    const goodWithHtml = data.goodWith?.length
+      ? data.goodWith.map(g => `<div class="info-row"><span class="lbl">${g.item}</span><span class="val small">${g.reason}</span></div>`).join('')
+      : '<div style="font-size:12px;color:var(--text-3);">등록된 아이템이 적어서 비교할 수 없어요.</div>';
+
+    const gapHtml = data.shoppingGap?.length
+      ? data.shoppingGap.map(g => `<span class="badge badge-blue">${CAT_EMOJI[g.category]||''} ${g.item}</span>`).join('')
+      : '';
+
+    result.innerHTML = `
+      ${data.stylingTip ? `<div style="font-size:13px;color:var(--text-2);line-height:1.7;padding:10px 12px;background:var(--surface2);border-radius:var(--radius-sm);margin-bottom:12px;">${data.stylingTip}</div>` : ''}
+      ${data.goodWith?.length ? `<div style="margin-bottom:12px;"><div class="card-title" style="margin-bottom:8px;">내 옷장에서 어울리는 것</div>${goodWithHtml}</div>` : ''}
+      ${gapHtml ? `<div><div class="card-title" style="margin-bottom:8px;">사면 좋을 아이템</div>${gapHtml}</div>` : ''}
+    `;
+    btn.disabled = false; btn.textContent = '다시 분석하기';
+  } catch(e) {
+    result.innerHTML = '<div style="font-size:12px;color:var(--text-3);">분석 실패. 다시 시도해주세요.</div>';
+    btn.disabled = false; btn.textContent = '이 아이템과 어울리는 옷 추천받기 →';
+  }
 }
 
 // ── MEASUREMENTS ──
@@ -1481,6 +2340,8 @@ function renderAnalysisResult(data) {
         <span class="rec-icon">${recIcon}</span>
         <span>${data.recommendation}${data.recommendationReason ? ` — ${data.recommendationReason}` : ''}</span>
       </div>
+      ${data.duplicateWarning ? `<div style="display:flex;gap:8px;align-items:flex-start;padding:10px 12px;background:var(--amber-bg);border-radius:var(--radius-sm);margin-bottom:10px;font-size:12px;color:var(--amber-text);"><span style="flex-shrink:0;font-size:14px;">⚠️</span><span><strong>옷장 중복 경고</strong> — ${data.duplicateWarning}</span></div>` : ''}
+      ${data.wardrobeCompatibility ? `<div style="display:flex;gap:8px;align-items:flex-start;padding:10px 12px;background:var(--green-bg);border-radius:var(--radius-sm);margin-bottom:10px;font-size:12px;color:var(--green-text);"><span style="flex-shrink:0;font-size:14px;">✓</span><span><strong>옷장 궁합</strong> — ${data.wardrobeCompatibility}</span></div>` : ''}
       ${scoresHtml}
     </div>
     ${sizeTableHtml}
@@ -1493,6 +2354,23 @@ function renderAnalysisResult(data) {
   `;
 }
 
+// ── CLOSET DUPLICATE CHECK ──
+function getClosetContext() {
+  if (!closetItems.length) return '';
+  return '\n\n내 옷장 아이템 목록:\n' + closetItems.slice(0,30).map(i=>`- ${i.category} / ${i.color||''} / ${i.name}`).join('\n');
+}
+
+function checkClosetDuplicate(productInfo) {
+  if (!closetItems.length) return null;
+  const info = (productInfo||'').toLowerCase();
+  const similar = closetItems.filter(item => {
+    const name = (item.name||'').toLowerCase();
+    const keywords = ['셔츠','티셔츠','니트','재킷','코트','팬츠','슬랙스','진','스커트','원피스','블라우스','후드','맨투맨','가방','신발'];
+    return keywords.some(k => info.includes(k) && name.includes(k));
+  });
+  return similar.length ? similar : null;
+}
+
 // ── ANALYZE BY URL ──
 async function analyzeByUrl() {
   const url = document.getElementById('product-url').value.trim();
@@ -1501,12 +2379,15 @@ async function analyzeByUrl() {
   const fabricInput = document.getElementById('fabric-input').value.trim();
   document.getElementById('analysis-result').innerHTML = `<div class="card"><div class="loading-state"><span class="spinner"></span>상품 정보를 AI로 분석 중입니다...</div></div>`;
 
+  const closetCtx = getClosetContext();
+
   const prompt = `쇼핑몰 URL: ${url}
 ${fabricInput ? `소재 성분 (사용자 입력): ${fabricInput}` : ''}
 
 내 신체 측정값: ${measurementSummary()}
+${closetCtx}
 
-이 URL의 상품이 내 신체에 맞을지 분석해줘. URL에 직접 접근이 안 되면 URL의 도메인과 경로 패턴으로 브랜드와 카테고리를 추론해서 일반적인 핏 가이드를 제공해줘. 한국 쇼핑몰(무신사, 에이블리, 29CM, 지그재그 등)과 글로벌 브랜드(Zara, H&M, Uniqlo 등)의 사이즈 기준을 잘 알고 있어.
+이 URL의 상품이 내 신체에 맞을지 분석해줘. URL에 직접 접근이 안 되면 URL의 도메인과 경로 패턴으로 브랜드와 카테고리를 추론해서 일반적인 핏 가이드를 제공해줘. 한국 쇼핑몰(무신사, 에이블리, 29CM, 지그재그 등)과 글로벌 브랜드(Zara, H&M, Uniqlo 등)의 사이즈 기준을 잘 알고 있어. 내 옷장 아이템이 있으면 비슷한 아이템이 이미 있는지, 옷장 아이템과 어울리는지도 판단해줘.
 
 아래 JSON 형식으로만 답변 (마크다운 없이):
 {
@@ -1515,6 +2396,8 @@ ${fabricInput ? `소재 성분 (사용자 입력): ${fabricInput}` : ''}
   "recommendationReason": "한 줄 이유",
   "overallScore": 75,
   "sizeRecommendation": "M 또는 95 등 구체적 사이즈",
+  "duplicateWarning": "비슷한 아이템이 옷장에 있으면 설명, 없으면 null",
+  "wardrobeCompatibility": "옷장 아이템과 어울리는 조합 설명 (옷장 데이터 없으면 null)",
   "scores": {
     "상체 핏": { "score": 80, "comment": "어깨~허리 부분 코멘트" },
     "하체 핏": { "score": 72, "comment": "엉덩이~다리 코멘트" },
